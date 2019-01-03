@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!-- Load the properties file -->
+	<context:property-placeholder location="classpath:sport.properties"/>
+
+<!-- Define your dependency beans here -->
+
+	<bean id = "myFortune" class = "com.code.springdemo.MyFortuneService">
+	</bean>
+    <!-- Define your beans here -->
+    
+   <!--  Constructor injections --> 
+    <bean id = "myCoach" class = "com.code.springdemo.TrackCoach">
+    <constructor-arg ref= "myFortune"/>
+    </bean> 
+    
+   
+    <bean id = "myCricketCoach" class = "com.code.springdemo.CricketCoach">
+     <!-- Set up setter injections -->
+    <property name ="myCricketFortune" ref = "myFortune"/>
+       <!-- Setup literal injections using hard-coded values -->
+    <!--  <property name ="email" value = "pradeepkathare123@gmail.com"/>
+     <property name ="team" value = "kathare"/>
+      -->
+     <!-- Setup literal injections using property file -->
+      <property name ="email" value = "${foo.email}"/>
+     <property name ="team" value =  "${foo.team}"/>
+     
+    </bean>
+    
+    <bean id="myLoggerConfig" class="com.code.springdemo.MyLoggerConfig" init-method="myinitLogger">
+    	<property name="rootLevelLogging" value="FINE" />
+    	<property name="printedLevelLogging" value="FINEST"/>
+    </bean>
+</beans>
+
+
+
+
+
