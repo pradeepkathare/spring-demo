@@ -10,7 +10,7 @@ public class HelloSpringApp {
 		//load the configuration file
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
-		//retrive the bean from springContainer
+		//retrive the bean from springContainer here mycoach is <id> defined in xml
 		Coach theCoach = applicationContext.getBean("myCoach", Coach.class);
 		
 		//call the methods
